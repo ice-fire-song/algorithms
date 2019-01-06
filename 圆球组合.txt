@@ -1,0 +1,48 @@
+Problem Description
+有n种球，每种球有无限多个。
+取其中k个排成一排，且其中至少有两个球的颜色是不一样的。
+问有多少种排列方法？
+结果对1,000,000,007取模
+Input
+多组输入数据。
+每组数据有两个整数n,k（1<=n,k<=100000），占一行。
+Output
+对于每组数据，输出答案，每个一行。
+
+#include<iostream>
+#include<cmath>
+#include<cstdio>
+#include<string>
+#include<algorithm>
+using namespace std;
+long long mod=1000000007;
+long long swift(long long n,long long k)
+{
+	long long sum=1;
+	while(k)
+	{
+		n=n%mod;
+		if(k%2==1)
+		sum=sum*n%mod;
+		n=n*n;
+		k=k>>1;
+	}
+	return sum;
+}
+int main()
+{
+	long long n,k;
+	while(scanf("%lld%lld",&n,&k)!=EOF)
+	{
+		long long result =swift(n,k);
+		if(result>=n)
+		{
+			printf("%lld\n",result-n);
+		}
+		else 
+		{
+			long long sum=result-n+mod;
+			printf("%lld\n",sum);
+		}
+	}
+}

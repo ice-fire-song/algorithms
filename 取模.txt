@@ -1,0 +1,35 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+int main()
+{
+      long long n;
+      while(scanf("%lld",&n)!=EOF)
+      {
+      	unsigned long long s=0;
+      	long long t=n/5;
+      	for(long long i=0;i<=t;i++)
+      	{
+      		unsigned long long a=1,b=1;
+			unsigned long long c;
+      		long long k=n-4*i;
+      		for(long long q=k;q>(k-i);q--)
+      	      {
+      			
+      			a=(a%1000000007)*(q%1000000007);
+			  }
+      		if(i==0)  c=1;
+      		else 
+			   {
+			   	for(long long  q=1;q<=i;q++)
+			   	   {
+			        
+			   		b=(b%1000000007)*(q%1000000007);
+				   }
+      		    c=((a%1000000007)*(b%1000000007))%1000000007;         	
+			   }			
+			s=s%1000000007+c;
+		}
+		printf("%lld\n",s);
+	  }
+}

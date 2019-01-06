@@ -1,0 +1,26 @@
+#include<string.h>
+#include<cstdio>
+#include<iostream>
+using namespace std;
+int b[1000020];
+int main()
+{
+  int n,a,f,m;
+  scanf("%d%d",&n,&m);
+  
+  	for(int i=1;i<=n;i++)
+  	{
+  	scanf("%d",&a);
+  		b[a]=i;//将其数值当作另一数组的下标
+	  }
+	  while(m--)
+	  {
+	  scanf("%d",&f);
+	  	if(b[f]>0) printf("Pos = %d\n",b[f]-1);
+		  else printf("No response.\n");
+	  }
+  
+	
+}
+
+	

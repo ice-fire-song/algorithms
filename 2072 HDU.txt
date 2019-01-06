@@ -1,0 +1,23 @@
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<set>
+#include<sstream>
+using namespace std;
+int main()
+{
+	string str1,str2;
+	while(getline(cin,str1))
+	{
+		if(str1=="#")break;
+		istringstream stream(str1);
+		set<string>Set;
+		while(stream>>str2)
+		{
+		Set.insert(str2);
+		
+		}
+		cout<<Set.size()<<endl;
+	}
+	
+ } 

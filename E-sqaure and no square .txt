@@ -1,0 +1,76 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+struct yy
+{
+	int digit;
+	int right;
+	int left;
+}one[200010];
+bool com(yy a,yy b)
+{
+	return a.right<b.right;
+}
+
+int main()
+{
+	int c[200010],j[200010],a[100010];
+ int n;
+ for(int i=0;i<100000;i++)
+ {
+ 	a[i]=i*i;
+	 if(a[i]>=1000000000) break;
+ }
+ while(cin>>n)
+ {  int sum=0,y=0,f=0,b=0;
+ 	for(int i=0;i<n;i++)
+ 	{
+ 		cin>>c[i];
+ 		int work=1;
+ 		for(int k=0;k<100000;k++)
+ 		{
+ 			
+ 			if(c[i]==a[k])
+ 			{
+ 				j[y]=c[i];
+ 				y++;
+ 				b++;
+ 				work=0;break;
+			 }
+			 else if(c[i]<a[k])
+                    {
+                    	one[f].right=a[k]-c[i];
+                    	one[f].left=c[i]-a[k-1];
+                    	break;
+					}
+		 }
+		 if(work==1)
+		  {
+		 	one[f].digit=c[i];f++;
+		 }
+	 }
+	 sort(one,one+f,com);
+	 sort(j,j+y);
+	 if(b==n/2) cout<<"0"<<endl;
+	 else if(b<n/2)
+	 {
+	 	for(int i=0;i<n/2-b;i++)
+	 	{
+	 		if(one[i].left<one[i].right)sum+=one[i].left;
+	 		else sum+=one[i].right;
+		 }
+		
+	 }
+	 else 
+	 {
+	 	for(int i=0;i<b-(n/2);i++)
+	 	{
+	 		if(j[i]!=0) sum+=1;
+	 		else sum+=2;
+	 	
+		 }
+		 cout<<sum<<endl;
+	 }
+ }
+
+ } 

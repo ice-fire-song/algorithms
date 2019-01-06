@@ -1,0 +1,83 @@
+学习来源：https://blog.csdn.net/acdreamers/article/details/10019849
+代码实现：
+#include <iostream>  
+#include <string.h>  
+#include <stdlib.h>  
+#include <stdio.h>  
+#include <time.h>  
+#include <math.h>  
+using namespace std;
+
+#define eps 1e-8     
+#define INF 1e20       
+#define delta 0.98  
+#define ts 100  
+struct point
+{
+	double x,y;
+	point()
+	{
+		x=y=0;
+	}
+	
+}p[110];
+int dx[4]={1,0,-1,0};
+int dy[4]={0,1,0,-1};
+int n;
+
+double dis(point a)
+{
+	double distance=0;
+	
+	for(int i=1;i<=n;i++)
+	{
+		distance+=sqrt((a.x-p[i].x )*(a.x-p[i].x )+(a.y-p[i].y )*(a.y-p[i].y ));
+	}
+	return distance;
+}
+
+double search()
+{
+	point s=p[1];
+	double t=ts;
+	double ans=INF;
+	
+	while(t>eps)
+	{
+		bool flag=1;
+		while(flag)
+		{
+			flag=0;
+			point tmp;
+			for(int i=0;i<4;i++)
+			{
+				tmp.x=s.x+dx[i]*t;
+				tmp.y=s.y+dy[i]*t;
+				double dd=dis(tmp);
+				if(dd<ans)
+				{
+					ans=dd;
+					s=tmp;
+					flag=1;
+				}
+			}
+		}
+		t=t*delta;
+	}
+	
+	return ans;
+}
+
+int main()
+{
+	while(~scanf("%d",&n))
+	{
+		for(int i=1;i<=n;i++)
+		{
+			scanf("%lf %lf",&p[i].x,&p[i].y );
+		}
+		
+	    long long res=search()+0.5;//四舍五入 
+	    printf("%lld\n",res); 
+	}
+}

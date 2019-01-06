@@ -1,0 +1,46 @@
+#include<iostream>
+
+#include<string.h>
+
+#include<cstdio>
+
+using namespace std;
+
+int main()
+
+{
+
+long long a;long long sum=0;
+	long long k;
+	
+cin>>k;
+	
+      
+ while(cin>>a)
+      
+ {
+       	 
+ if (cin.get() != '\n') 
+          
+  sum+=a;
+       	  
+  else{
+       	  	
+sum+=a;
+			
+ break;
+      }
+			 
+	   
+}
+	   
+cout<<sum<<endl;
+		
+if(sum>=k)
+	    	
+cout<<"Run!"<<endl;
+		
+  else
+ cout<<"Fight!"<<endl;
+	
+ } 

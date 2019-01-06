@@ -1,0 +1,118 @@
+
+#include<cstdio>  
+#include<iostream>  
+#include<cstring>  
+#include<cstdlib>  
+#include<algorithm>   
+#include<cmath>  
+#include<ctime>  
+using namespace std;  
+ 
+int n; 
+struct point 
+{
+	double x,y;
+ }p[205]; 
+ 
+double dis(point a)  
+{  
+    double res=0;  
+    for(int i=1;i<=n;i++)  
+    {  
+        res+=sqrt((p[i].x-a.x)*(p[i].x -a.x)+(p[i].y -a.y)*(p[i].y -a.y));  
+    }  
+    return res;  
+}  
+int main()  
+{  
+    srand(time(NULL));  
+    while(scanf("%d",&n)!=EOF)  
+    {  
+        for(int i=1;i<=n;i++)scanf("%lf%lf",&p[i].x,&p[i].y );  
+        double step=1000;  
+        point pass=p[1];
+        double ans=dis(pass);  
+        while(step>1e-10)  
+        {  
+            double rad=rand()%360+1;  
+            point now;
+            now.x=pass.x+step*cos(rad);  
+            now.y=pass.y+step*sin(rad);  
+            double tmp=dis(now);  
+            if(tmp<ans)  
+            {  
+                ans=tmp;  
+               pass=now;  
+            }  
+            else  
+            {  
+                if(exp((tmp-ans)/step)<(rand()%10000)/10000.0)  
+                {  
+                    ans=tmp;  
+                    pass=now;
+                }  
+            }  
+            step*=0.98;  
+        }  
+        printf("%.0lf\n",ans);  
+    }  
+    return 0;  
+}  
+
+
+
+
+
+
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <ctime>
+#include <algorithm>
+using namespace std;
+
+
+struct  P{ int x, y; }a[150];
+int n;
+inline int rand(int x, int y) { return x+(rand()%(y-x+1)); }
+inline double sqr(double x) { return x*x; }
+inline double dis(double x1, double y1, double x2, double y2) { return sqrt(sqr(x1-x2)+sqr(y1-y2)); }
+inline double getdis(double x, double y) {
+    double sum=0;
+    for(int i=0; i<n; ++i) sum+=dis(x, y, a[i].x, a[i].y);
+    return sum;
+}
+double getnode(double x, double y, double T, double &xx, double &yy) {
+    double tx, ty, dis, re=1e50;
+    for(int i=0; i<50; ++i) {
+        tx=x+((double)rand(-100, 100)/100)*T;
+        ty=y+((double)rand(-100, 100)/100)*T;
+        dis=getdis(tx, ty);
+        if(dis<re) {
+            re=dis;
+            xx=tx;
+            yy=ty;
+        }
+    }
+    return re;
+}
+int main() {
+    srand(1998);
+    while(~scanf("%d", &n)) {
+        double x=0, y=0, T=1e20, dE, tans, ans, nans, xx, yy;
+        for(int i=0; i<n; ++i) scanf("%d%d", &a[i].x, &a[i].y), x+=a[i].x, y+=a[i].y;
+        x/=n; y/=n;
+        nans=ans=getdis(x, y);
+        while(T>0.01) {
+            tans=getnode(x, y, T, xx, yy);
+            dE=nans-tans;
+            if(dE>=0 || exp(dE/T)>(double)rand(1, 99999)/100000) {
+                nans=tans; x=xx; y=yy; ans=min(ans, nans);
+            }
+            T*=0.9;
+        }
+        long long s=ans+0.5;
+        printf("%lld\n", s);
+    }
+    return 0;
+}

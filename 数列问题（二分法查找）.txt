@@ -1,0 +1,58 @@
+#include<iostream>
+#include<cmath>
+#include<cstdio>
+#include<string>
+#include<algorithm>
+using namespace std;
+struct aa
+{
+int indix;
+	int digit;
+}one[100100];
+bool complare(aa a,aa b)
+{
+	return a.digit<b.digit;
+}
+int binarysearch(aa A[],int left,int right,int x)
+{
+	int mid;
+	while(left<=right)
+	{
+		mid=(left+right)/2;
+		if(A[mid].digit==x)
+	{
+		return mid;
+		}
+		else if(A[mid].digit>x)
+		{
+			right=mid-1;
+		}
+		else
+		{
+			left=mid+1;
+		}
+	}
+ return -1;
+}
+int main()
+{
+	int n,q;
+	while(cin>>n>>q)
+	{
+		for(int i=0;i<n;i++)
+		{
+			cin>>one[i].digit;
+			one[i].indix=i;
+		}
+		sort(one,one+n,complare);
+		int a;
+		for(int i=0;i<q;i++)
+        {
+        	cin>>a;
+        int m=	binarysearch(one,0,n-1,a); 
+		if(m==-1)
+		cout<<"No response." <<endl;
+		else cout<<one[m].indix<<endl;
+		}
+	}
+}

@@ -1,0 +1,56 @@
+#include<iostream>
+#include<algorithm> 
+using namespace std;
+struct dd
+{
+	int le;
+	int ri;
+}yes[20000];
+bool com(dd a,dd b)
+{
+	if(a.le!=b.le)
+	{
+		return a.le<b.le;
+	}
+	else return a.ri<b.ri;
+}
+int main()
+{
+	int n;
+	while(cin>>n)
+	{
+		for(int i=0;i<n;i++)
+		{
+			cin>>yes[i].le>>yes[i].ri;
+		}
+		sort(yes,yes+n,com);
+		dd y[20000];
+		y[0].le=yes[0].le;
+		y[0].ri=yes[0].ri; 
+		int k=0;
+		for(int i=1;i<n;i++)
+		{
+		  	if(yes[i].le==y[k].le )
+		  	{
+		  		if(yes[i].ri>y[k].ri) y[k].ri=yes[i].ri;
+			  }
+			  else 
+			  {
+			    if(yes[i].le>y[k].ri  )
+			    {
+			    	k++;
+			    	y[k].le=yes[i].le;
+			    		y[k].ri=yes[i].ri;
+			    	
+				}
+				else 
+				{
+					if(yes[i].ri>y[k].ri) y[k].ri=yes[i].ri;	
+				}
+			  }
+		}
+		cout<<k+1<<endl;
+		for(int i=0;i<=k;i++)
+		cout<<y[i].le <<" "<<y[i].ri<<endl;
+	}
+}

@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+struct yxt
+{
+	ll a,b;
+} t[27543];
+bool cmp(yxt aa,yxt bb)
+{
+	return aa.a>bb.a;
+}
+int main()
+{
+	ll T;
+	scanf("%lld",&T); 
+	while(T--)
+	{
+		ll n;
+		scanf("%lld",&n);
+		ll sum=0;
+		ll tem=0;
+		for(int i=0;i<n;i++)
+     	{
+			    scanf("%lld %lld",&t[i].a,&t[i].b); 
+			    
+				if(t[i].a>=0)  
+				{
+					sum+=t[i].b;
+					tem+=a[i]*b[i];
+				 } 
+				
+			    if(t[i].a<0) 
+				 {
+				 	for(int q=0;q<t[i].b;q++)
+				 	{
+				 		if(tem>0)
+				 		{
+				 			sum++;
+				 			tem-=t[i].a;
+						 }
+				
+				 		
+					 }
+					
+					
+				 } 
+				 
+		}
+		ll s=0;
+		
+		sort(t,t+n,cmp);
+		for(int i=0;i<n;i++) 
+		{
+		//	if(t[i].a<=0)  break;
+
+			while(t[i].b>0)
+			{
+				     if(t[i].a>0)
+					 {
+					 	
+				        s+=t[i].a*sum;
+				        sum--;
+				        t[i].b--;
+					 }
+			         if(t[i].a<0&&tem>=t[i].a)
+			         {
+			         	 s+=tem-a[i];
+			         	
+					 }
+			}
+	
+		}
+		printf("%lld\n",s); 
+	 } 
+}
